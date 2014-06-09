@@ -1,3 +1,14 @@
+" Muestra bien caracteres usando UTF-8
+if has("multi_byte")
+  if &termencoding == ""
+    let &termencoding = &encoding
+  endif
+  set encoding=utf-8
+  setglobal fileencoding=utf-8
+  "setglobal bomb
+  set fileencodings=ucs-bom,utf-8,latin1
+endif
+
 " ========================================================================
 " Vundle stuff
 " ========================================================================
@@ -432,13 +443,13 @@ if has("autocmd")
 
 endif " has("autocmd")
 
-" Muestra bien caracteres usando UTF-8
-if has("multi_byte")
-  if &termencoding == ""
-    let &termencoding = &encoding
+" Setea font en gVim
+if has("gui_running")
+  if has("gui_gtk2")
+    set guifont=Consolas 11
+  elseif has("gui_photon")
+    set guifont=Consolas:s11
+  else
+    set guifont=Consolas:h16:cDEFAULT
   endif
-  set encoding=utf-8
-  setglobal fileencoding=utf-8
-  "setglobal bomb
-  set fileencodings=ucs-bom,utf-8,latin1
 endif
