@@ -453,3 +453,8 @@ if has("gui_running")
     set guifont=Consolas:h16:cDEFAULT
   endif
 endif
+
+" Permite que Vim detecte el directorio para crear archivos temporarios
+" en Windows
+set directory+=.,$TMP,$TEMP
+
