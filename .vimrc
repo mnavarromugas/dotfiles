@@ -458,3 +458,7 @@ endif
 " en Windows
 set directory+=.,$TMP,$TEMP
 
+" Mis mappings
+map <C-J> <C-W>j<C-W>_
+map <C-K> <C-W>k<C-W>_
+
