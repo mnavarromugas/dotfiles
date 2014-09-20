@@ -189,7 +189,6 @@ set autoread
 set wmh=0
 set viminfo+=!
 set guioptions-=T
-set guifont=Triskweline_10:h10
 set et
 set sw=2
 set smarttab
@@ -446,13 +445,18 @@ endif " has("autocmd")
 " Setea font en gVim
 if has("gui_running")
   if has("gui_gtk2")
-    set guifont=Consolas 11
+    set guifont=Consolas 16
   elseif has("gui_photon")
-    set guifont=Consolas:s11
+    set guifont=Consolas:s16
   else
     set guifont=Consolas:h16:cDEFAULT
   endif
 endif
+
+" Cursor lindo
+highlight Cursor guifg=white guibg=#ffb600
+highlight iCursor guifg=white guibg=steelblue
+set guicursor=n-v-c:block-Cursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor,r-cr:hor20-Cursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
 " Permite que Vim detecte el directorio para crear archivos temporarios
 " en Windows
@@ -462,3 +466,11 @@ set directory+=.,$TMP,$TEMP
 map <C-J> <C-W>j<C-W>_
 map <C-K> <C-W>k<C-W>_
 
+" Ctrl-j/k deletes blank line below/above, and Alt-j/k inserts.
+nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
+nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
+nnoremap <silent><A-j> :set paste<CR>m`o<Esc>``:set nopaste<CR>
+nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
+
+" Auto close tags
+:iabbrev <silent> </ </<C-x><C-o>
