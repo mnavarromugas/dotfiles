@@ -1,4 +1,4 @@
-" Muestra bien caracteres usando UTF-8
+" Muestra bien los caracteres usando UTF-8
 if has("multi_byte")
   if &termencoding == ""
     let &termencoding = &encoding
@@ -23,23 +23,76 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " My bundles
-Plugin 'elixir-lang/vim-elixir'
+" =========================
+
+" Supertab allows you to use <Tab> for all your insert completion needs (:help ins-completion).
 Plugin 'ervandew/supertab'
+
+" Adds CoffeeScript support to vim. It covers syntax, indenting, compiling, and more.
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'koron/nyancat-vim'
+
+" Search and replace across many files.
+" Use :Gsearch to get a buffer window of your search results then you can make the replacements
+" inside the buffer window using traditional tools (s/foo/bar/) and invoke :Greplace to make your changes.
 Plugin 'skwp/greplace.vim'
+
+" Provides easy to use, file-type sensible comments for Vim. It works like a toggle.
 Plugin 'tomtom/tcomment_vim'
+
+" Lightweight support for Ruby's Bundler
 Plugin 'tpope/vim-bundler'
+
+" Provides syntax highlighting, indenting, and some editing commands for Cucumber
 Plugin 'tpope/vim-cucumber'
+
+" Asynchronous build and test dispatcher
 Plugin 'tpope/vim-dispatch'
+
+" Helps to end certain structures automatically. In Ruby, adds end after if, do, def and other keywords.
 Plugin 'tpope/vim-endwise'
+
+" A Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
+
+" Ruby on Rails power tools
 Plugin 'tpope/vim-rails'
+
+" enable repeating supported plugin maps with '.'
 Plugin 'tpope/vim-repeat'
+
+" Provides mappings to easily delete, change and add such surroundings in pairs.
 Plugin 'tpope/vim-surround'
+
+" Pairs of handy bracket mappings
 Plugin 'tpope/vim-unimpaired'
+
+" Vim configuration files for editing and compiling Ruby within Vim
 Plugin 'vim-ruby/vim-ruby'
-Plugin 'wincent/Command-T'
+
+" Fast file navigation for VIM
+" Plugin 'wincent/Command-T'
+
+" A tree explorer plugin for vim.
+Plugin 'scrooloose/nerdtree'
+
+" Provides a much simpler way to use some motions in vim <leader><leader>
+Plugin 'Lokaltog/vim-easymotion'
+
+" Syntax checking plugin for Vim that runs files through external syntax checkers
+Plugin 'scrooloose/syntastic'
+
+" Fuzzy file, buffer, mru, tag, etc finder
+Plugin 'kien/ctrlp.vim'
+
+" Snippets in Vim
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+" Grammar checker for English, French, German (etc.)
+Plugin 'vim-scripts/LanguageTool'
+
+" Visually select increasingly larger regions of text using the same key combination
+Plugin 'terryma/vim-expand-region'
 
 " nelstrom's plugin depends on kana's
 Plugin 'kana/vim-textobj-user'
@@ -52,6 +105,23 @@ Plugin 'tpope/vim-fireplace'
 
 " Colors
 Plugin 'nanotech/jellybeans.vim'
+
+" Markdown
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+" JavaScript
+Plugin 'jelera/vim-javascript-syntax'
+Plugin 'pangloss/vim-javascript'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'Raimondi/delimitMate'
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'marijnh/tern_for_vim'
+Plugin 'einars/js-beautify'
+Plugin 'maksimr/vim-jsbeautify'
+Plugin 'majutsushi/tagbar'
+
+" =========================
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -85,7 +155,19 @@ augroup END
 runtime macros/matchit.vim
 " ================
 
-let mapleader = ","
+" ========================================================================
+" JavaScript stuff
+" ========================================================================
+map <c-f> :call JsBeautify()<cr>
+" or
+autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
+" for html
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+" for css or scss
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
+" ================
+
+let mapleader = " "
 
 map <Leader>ac :sp app/controllers/application_controller.rb<cr>
 vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
@@ -160,21 +242,34 @@ map <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
 map <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
 
 map <C-h> :nohl<cr>
-imap <C-l> :<Space>
 " Note that remapping C-s requires flow control to be disabled
 " (e.g. in .bashrc or .zshrc)
 map <C-s> <esc>:w<CR>
 imap <C-s> <esc>:w<CR>
 map <C-t> <esc>:tabnew<CR>
 map <C-x> <C-w>c
-map <C-n> :cn<CR>
-map <C-p> :cp<CR>
+" map <C-n> :cn<CR>
+" map <C-p> :cp<CR>
+
+" Map <leader>w to :w!
+map <leader>w :w!<CR>
+
+" Like Ctrl-w in Insert mode but to the other side
+imap <C-d> <C-o>dw
+
+" Like Ctrl-h in Insert mode but to the other side
+imap <C-l> <C-o>x
+
+" Ctrl-P maps
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" Para sacarme un mal hábito (moverme del homerow)
+inoremap <BS> <C-o>:echoe 'Usa <CTRL-h> para mover menos las manos'<CR>
 
 " Emacs-like beginning and end of line.
 imap <c-e> <c-o>$
 imap <c-a> <c-o>^
-
-
 
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set history=500		" keep 500 lines of command line history
@@ -183,6 +278,10 @@ set showcmd		" display incomplete commands
 set autoindent
 set showmatch
 set nowrap
+set showbreak=\ \ >\ 
+set cpoptions+=n
+set formatoptions+=l
+set lbr
 set backupdir=~/.tmp
 set directory=~/.tmp " Don't clutter my dirs up with swp and tmp files
 set autoread
@@ -195,7 +294,6 @@ set smarttab
 set noincsearch
 set ignorecase smartcase
 set laststatus=2  " Always show status line.
-set relativenumber
 set gdefault " assume the /g flag on :s substitutions to replace all matches in a line
 set autoindent " always set autoindenting on
 set bg=light
@@ -228,12 +326,8 @@ set nofoldenable " Say no to code folding...
 command! Q q " Bind :Q to :q
 command! Qall qall 
 
-
 " Disable Ex mode
 map Q <Nop>
-
-" Disable K looking stuff up
-map K <Nop>
 
 au BufNewFile,BufRead *.txt setlocal nolist " Don't display whitespace
 
@@ -247,8 +341,57 @@ set noesckeys
 set ttimeout
 set ttimeoutlen=1
 
+" Copy paragraph to clipboard
+nmap <C-c> "+yip`]
+
+" Open markdown files with Chrome.
+autocmd BufEnter *.md exe 'noremap <F5> :!start  C:\Program Files\Google\Chrome\Application\chrome.exe %:p<CR>'
+
+" Lenguage tool config
+let g:languagetool_jar='C:\LanguageTool-2.7\languagetool-commandline.jar'
+
 " Turn on spell-checking in markdown and text.
-" au BufRead,BufNewFile *.md,*.txt setlocal spell
+au BufRead,BufNewFile *.md,*.txt setlocal spell
+au BufRead,BufNewFile *.md,*.txt set wrap
+
+" Toggle spell checking on and off with `,s`
+map <silent> <leader>ts :set spell!<CR>
+
+" Set spell-cheging language to Spanish
+set spelllang=es
+
+" Set spell highlight style
+if version >= 700
+  hi SpellBad   guisp=red    gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=underline
+  hi SpellCap   guisp=yellow gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=underline
+  hi SpellRare  guisp=blue   gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=underline
+  hi SpellLocal guisp=orange gui=undercurl guifg=NONE guibg=NONE ctermfg=NONE ctermbg=NONE term=underline cterm=underline
+endif
+
+" Toggle between relative and normal line numbers
+function! NumberToggle()
+  if(&relativenumber == 1)
+    call SetRelativeNumberOff()
+  else
+    call SetRelativeNumberOn()
+  endif
+endfunc
+function! SetRelativeNumberOn()
+    set nonumber
+    set relativenumber
+endfunction
+function! SetRelativeNumberOff()
+    set number
+    set norelativenumber
+endfunction
+
+nnoremap <C-n> :call NumberToggle()<cr>
+
+" Automatic toggle relative line numbers
+autocmd FocusLost * :call SetRelativeNumberOff()
+autocmd FocusGained * :call SetRelativeNumberOn()
+autocmd InsertEnter * :call SetRelativeNumberOff()
+autocmd InsertLeave * :call SetRelativeNumberOn()
 
 " Merge a tab into a split in the previous window
 function! MergeTabs()
@@ -357,7 +500,8 @@ function! OpenJasmineSpecInBrowser()
   silent exec "!open ~/bin/chrome" url
 endfunction
 
-" set statusline+=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+" Statusline format
+set statusline+=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
 let g:CommandTMaxHeight=50
 let g:CommandTMatchWindowAtTop=1
@@ -445,11 +589,11 @@ endif " has("autocmd")
 " Setea font en gVim
 if has("gui_running")
   if has("gui_gtk2")
-    set guifont=Consolas 16
+    set guifont=Consolas 15
   elseif has("gui_photon")
-    set guifont=Consolas:s16
+    set guifont=Consolas:s15
   else
-    set guifont=Consolas:h16:cDEFAULT
+    set guifont=Consolas:h15:cDEFAULT
   endif
 endif
 
@@ -474,3 +618,38 @@ nnoremap <silent><A-k> :set paste<CR>m`O<Esc>``:set nopaste<CR>
 
 " Auto close tags
 :iabbrev <silent> </ </<C-x><C-o>
+
+" Source the vimrc file after saving it
+if has("autocmd")
+  autocmd bufwritepost .vimrc source $MYVIMRC
+endif
+
+" Map to edit .vimrc
+nmap <leader>ev :tabedit $MYVIMRC<CR>
+
+" Syntastic Plugin configuration
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" Tagbar config
+nmap <F8> :TagbarToggle<CR>
+
+" Toggle for line at cursor to be always vertically aligned
+nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
+
+" UltiSnips configuration
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" Expand region plugin mappings
+map K <Plug>(expand_region_expand)
+map J <Plug>(expand_region_shrink)
