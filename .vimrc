@@ -1,4 +1,4 @@
-" Muestra bien caracteres usando UTF-8
+" Muestra bien los caracteres usando UTF-8
 if has("multi_byte")
   if &termencoding == ""
     let &termencoding = &encoding
@@ -326,7 +326,6 @@ set nofoldenable " Say no to code folding...
 
 command! Q q " Bind :Q to :q
 command! Qall qall 
-
 
 " Disable Ex mode
 "map Q <Nop>
