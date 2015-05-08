@@ -91,6 +91,9 @@ Plugin 'honza/vim-snippets'
 " Grammar checker for English, French, German (etc.)
 Plugin 'vim-scripts/LanguageTool'
 
+" Visually select increasingly larger regions of text using the same key combination
+Plugin 'terryma/vim-expand-region'
+
 " nelstrom's plugin depends on kana's
 Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
@@ -112,6 +115,7 @@ Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'Raimondi/delimitMate'
+" README: YouCompleteMe it's not easy to compile in Windows but it's awesome
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'marijnh/tern_for_vim'
 Plugin 'einars/js-beautify'
@@ -164,7 +168,7 @@ autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 " ================
 
-let mapleader = ","
+let mapleader = " "
 
 map <Leader>ac :sp app/controllers/application_controller.rb<cr>
 vmap <Leader>b :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
@@ -262,7 +266,7 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 
 " Para sacarme un mal hábito (moverme del homerow)
-inoremap <BS> <C-o>:echoe 'Usa <CTRL-h> para mover menos las manos'<CR>
+"inoremap <BS> <C-o>:echoe 'Usa <CTRL-h> para mover menos las manos'<CR>
 
 " Emacs-like beginning and end of line.
 imap <c-e> <c-o>$
@@ -325,10 +329,10 @@ command! Qall qall
 
 
 " Disable Ex mode
-map Q <Nop>
+"map Q <Nop>
 
 " Disable K looking stuff up
-map K <Nop>
+"map K <Nop>
 
 au BufNewFile,BufRead *.txt setlocal nolist " Don't display whitespace
 
@@ -650,3 +654,7 @@ let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" Expand region plugin mappings
+map K <Plug>(expand_region_expand)
+map J <Plug>(expand_region_shrink)
