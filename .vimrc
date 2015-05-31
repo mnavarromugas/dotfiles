@@ -122,6 +122,9 @@ Plugin 'einars/js-beautify'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'majutsushi/tagbar'
 
+" Minimal typing tutor
+Plugin 'rgoulter/Tortoise-Typing'
+
 " =========================
 
 " All of your Plugins must be added before the following line
