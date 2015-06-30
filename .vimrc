@@ -25,6 +25,9 @@ Plugin 'gmarik/Vundle.vim'
 " My bundles
 " =========================
 
+" Provides syntax highlighting for Antlr
+Plugin 'jrozner/vim-antlr'
+
 " Supertab allows you to use <Tab> for all your insert completion needs (:help ins-completion).
 Plugin 'ervandew/supertab'
 
