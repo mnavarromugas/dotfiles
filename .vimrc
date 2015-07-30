@@ -128,6 +128,9 @@ Plugin 'majutsushi/tagbar'
 " Minimal typing tutor
 Plugin 'rgoulter/Tortoise-Typing'
 
+" Gradle syntax highlighting
+Plugin 'tfnico/vim-gradle'
+
 " =========================
 
 " All of your Plugins must be added before the following line
