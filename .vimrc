@@ -122,6 +122,15 @@ Plugin 'einars/js-beautify'
 Plugin 'maksimr/vim-jsbeautify'
 Plugin 'majutsushi/tagbar'
 
+" Pasting with indentation adjusted to destination context
+Plugin 'sickill/vim-pasta'
+
+" Zoom in/out of windows
+Plugin 'regedarek/ZoomWin'
+
+" Sparkup lets you write HTML code faster
+Plugin 'tristen/vim-sparkup'
+
 " =========================
 
 " All of your Plugins must be added before the following line
