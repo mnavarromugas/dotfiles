@@ -25,6 +25,9 @@ Plugin 'gmarik/Vundle.vim'
 " My bundles
 " =========================
 
+" Provides syntax highlighting for Antlr
+Plugin 'jrozner/vim-antlr'
+
 " Supertab allows you to use <Tab> for all your insert completion needs (:help ins-completion).
 Plugin 'ervandew/supertab'
 
@@ -130,6 +133,12 @@ Plugin 'regedarek/ZoomWin'
 
 " Sparkup lets you write HTML code faster
 Plugin 'tristen/vim-sparkup'
+
+" Minimal typing tutor
+Plugin 'rgoulter/Tortoise-Typing'
+
+" Gradle syntax highlighting
+Plugin 'tfnico/vim-gradle'
 
 " =========================
 
