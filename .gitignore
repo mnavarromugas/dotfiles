@@ -7,3 +7,4 @@
 
 # Config files to commit
 !.vimrc
+!.tmux.conf
