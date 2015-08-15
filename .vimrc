@@ -624,6 +624,20 @@ highlight Cursor guifg=white guibg=#ffb600
 highlight iCursor guifg=white guibg=steelblue
 set guicursor=n-v-c:block-Cursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ver25-Cursor,r-cr:hor20-Cursor,sm:block-Cursor-blinkwait175-blinkoff150-blinkon175
 
+" Cursor lindo in xterm
+" changing the cursor color
+if &term =~ "xterm\\|rxvt"
+  " use an red cursor in insert mode
+  let &t_SI = "\<Esc>]12;red\x7"
+  " use a orange cursor otherwise
+  let &t_EI = "\<Esc>]12;orange\x7"
+  silent !echo -ne "\033]12;orange\007"
+  " reset cursor when vim exits
+  " use \033]112\007 for non gnome-terminal
+  " use \003]12;gray\007 for gnome-terminal
+  autocmd VimLeave * silent !echo -ne "\033]12;gray\007"
+endif
+
 " Permite que Vim detecte el directorio para crear archivos temporarios
 " en Windows
 set directory+=.,$TMP,$TEMP
