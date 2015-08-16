@@ -41,6 +41,20 @@ Plugin 'skwp/greplace.vim'
 
 " Provides easy to use, file-type sensible comments for Vim. It works like a toggle.
 Plugin 'tomtom/tcomment_vim'
+"Plugin 'tpope/vim-commentary'
+
+" Replace text with the content of a register.
+Plugin 'vim-scripts/ReplaceWithRegister'
+
+" Teach Vim about titlecase, with support for motions and text objects.
+Plugin 'christoomey/vim-titlecase'
+
+" Vim mapping for sorting a range of text.
+Plugin 'christoomey/vim-sort-motion'
+
+" Vim plugin for copying to the system clipboard with text-objects and
+" motions.
+Plugin 'christoomey/vim-system-copy'
 
 " Lightweight support for Ruby's Bundler
 Plugin 'tpope/vim-bundler'
