@@ -642,7 +642,8 @@ set guicursor=n-v-c:block-Cursor-blinkon0,ve:ver35-Cursor,o:hor50-Cursor,i-ci:ve
 " changing the cursor color
 if &term =~ "xterm\\|rxvt"
   " use an red cursor in insert mode
-  let &t_SI = "\<Esc>]12;red\x7"
+  " let &t_SI = "\<Esc>]12;red\x7"
+  let &t_SI = "\<Esc>]12;grey\x7"
   " use a orange cursor otherwise
   let &t_EI = "\<Esc>]12;orange\x7"
   silent !echo -ne "\033]12;orange\007"
@@ -650,6 +651,18 @@ if &term =~ "xterm\\|rxvt"
   " use \033]112\007 for non gnome-terminal
   " use \003]12;gray\007 for gnome-terminal
   autocmd VimLeave * silent !echo -ne "\033]12;gray\007"
+endif
+" changing the cursor shape
+if &term =~ '^xterm\\|rxvt'
+  " solid underscore
+  let &t_SI .= "\<Esc>[4 q"
+  " solid block
+  let &t_EI .= "\<Esc>[2 q"
+  " 1 or 0 -> blinking block
+  " 3 -> blinking underscore
+  " Recent versions of xterm (282 or above) also support
+  " 5 -> blinking vertical bar
+  " 6 -> solid vertical bar
 endif
 
 " Permite que Vim detecte el directorio para crear archivos temporarios
